@@ -25,7 +25,7 @@ class Solution {
                 ans = sb.toString();
             }
         }else{
-            found = false;
+            return;
         }
         for(int i = 0 ; i < 26 ; i++){
             sb.append((char)('a' + i));
