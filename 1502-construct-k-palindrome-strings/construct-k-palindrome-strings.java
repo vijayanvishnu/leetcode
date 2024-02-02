@@ -16,17 +16,6 @@ class Solution {
         if(odd > k){
             return false;
         }
-        if(myK + odd >= k){
-            return true;
-        }else{
-            while(myK + odd < k){
-                myK--;
-                odd+=2;
-            }
-            if(myK + odd == k){
-                return true;
-            }
-        }
-        return false;
+        return true;
     }
 }
