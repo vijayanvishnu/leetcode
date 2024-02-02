@@ -1,2 +1,2 @@
 # Leetcode
-This repo consists of my leetcode solutions with the coresponding question for that perticular problem.
+This repo consists of my LeetCode solutions with the corresponding question for that particular problem.
