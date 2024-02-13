@@ -13,7 +13,6 @@ class Solution {
             int ax = dir[x][0] + i;
             int ay = dir[x][1] + j;
             for(int y = 0; y < dir.length ; y++){
-                int bx = dir[y][0] + i;
                 int by = dir[y][1] + l;
                 if(ay == by){
                     continue;
