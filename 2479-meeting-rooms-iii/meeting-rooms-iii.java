@@ -14,33 +14,34 @@ class Solution {
             if(ans != 0) return ans;
             return Long.compare(a[1], b[1]);
         });
-        PriorityQueue<int []> emptyQueue = new PriorityQueue<>((a,b)->{
-            return Integer.compare(a[1], b[1]);
+        PriorityQueue<long []> emptyQueue = new PriorityQueue<>((a,b)->{
+            return Long.compare(a[1], b[1]);
         });
-        for(int i = 0; i < n ; i++){
-            emptyQueue.add(new int[]{0,i});
+        for(long i = 0; i < n ; i++){
+            emptyQueue.add(new long[]{0,i});
         }
         while(!meets.isEmpty()){
-            while(!queue.isEmpty() && queue.peek()[0] <= meets.peek()[0] ){
+            while(!queue.isEmpty() && queue.peek()[0] <= meets.peek()[0] && queue.peek()[0] != 0 ){
                 long poll[] = queue.poll();
-                emptyQueue.add(new int[]{0,(int) poll[1]});
+                poll[0] = 0;
+                emptyQueue.add(poll);
             }
-            if(!emptyQueue.isEmpty()){
-                int poll[] = emptyQueue.poll();
+            if(emptyQueue.isEmpty()){
+                long poll[] = queue.poll();
+                emptyQueue.add(poll);
+            }
+            long poll[] = emptyQueue.poll();
+            if(rooms[(int)poll[1]] == 0 || meets.peek()[0] >= poll[0]){
                 poll[0] = meets.poll()[1];
-                rooms[poll[1]]++;
-                queue.add(new long[]{poll[0],poll[1]});
             }else{
-                long poll[] = queue.poll();
-                poll[0] = poll[0] + meets.peek()[1]  - meets.poll()[0];
-                rooms[(int) poll[1]]++;
-                queue.add(poll);
+                poll[0] = poll[0] - meets.peek()[0] + meets.poll()[1];
             }
+            rooms[(int)poll[1]]++;
+            queue.add(poll);
         }
         int max = 0;
         int ans = 0;
         for(int i = 0; i < n ; i ++){
-            System.out.println(rooms[i]);
             if(rooms[i] > max){
                 max = rooms[i];
                 ans = i;
