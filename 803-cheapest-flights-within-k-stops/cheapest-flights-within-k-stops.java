@@ -1,5 +1,4 @@
 class Solution {
-    boolean visited[];
     int dest = 0;
     Integer dp[][];
     private int helper(int start , Map<Integer,List<int []>> graph , int k){
@@ -12,18 +11,13 @@ class Solution {
         if(dp[start][k + 1] != null){
             return dp[start][k + 1];
         }
-        // visited[start] = true;
         int ans = 1_00_000_0;
         for(int i[] : graph.get(start)){
-            if(!visited[i[0]]){
-                ans = Math.min(ans,i[1] + helper(i[0] , graph, k - 1));
-            }
+            ans = Math.min(ans,i[1] + helper(i[0] , graph, k - 1));
         }
-        // visited[start] = false;
         return dp[start][k+ 1] = ans;
     }
     public int findCheapestPrice(int n, int[][] flights, int src, int dst, int k) {
-        visited = new boolean[n];
         this.dest = dst;
         dp = new Integer[n][k + 2];
         Map<Integer,List<int []>> graph = new HashMap<>();
