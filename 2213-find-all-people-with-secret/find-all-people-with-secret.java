@@ -1,68 +1,51 @@
 class Solution {
+    int unionFind[];
+    private int find(int idx){
+        if(idx == unionFind[idx]){
+            return idx;
+        }
+        return unionFind[idx] = find(unionFind[idx]);
+    }
+    private void union(int idxA , int idxB){
+        int prnt_a = find(idxA);
+        int prnt_b = find(idxB);
+        if(prnt_b > prnt_a){
+            unionFind[prnt_b] = prnt_a;
+        }else{
+            unionFind[prnt_a] = prnt_b;
+        }
+    }
     public List<Integer> findAllPeople(int n, int[][] meetings, int firstPerson) {
-        Arrays.sort(meetings , (a,b)->Integer.compare(a[2],b[2]));
-        ArrayList<ArrayList<Integer>> graph = new ArrayList<>();
-        ArrayList<Integer> l = new ArrayList<>();
-        int i=0;
-        int lastTime = meetings[i][2];
-        while(i<meetings.length){
-            if(meetings[i][2]==lastTime){
-                l.add(i);
+        List<Integer> ans = new ArrayList<>();
+        unionFind = new int[n];
+        Arrays.sort(meetings , (a,b) -> a[2] - b[2]);
+        for(int i = 0; i < n ; i++){
+            unionFind[i] = i;
+        }
+        int i = 0;
+        union(0,firstPerson);
+        while(i < meetings.length){
+            int ref = meetings[i][2];
+            Set<Integer> set = new HashSet<>();
+            while(i < meetings.length && meetings[i][2] == ref){
+                int min = Math.min(meetings[i][0] , meetings[i][1]);
+                int max = Math.max(meetings[i][0] , meetings[i][1]);
+                union(min , max);
+                set.add(meetings[i][0]);
+                set.add(meetings[i][1]);
                 i++;
             }
-            else{
-                ArrayList<Integer> r = new ArrayList<>();
-                r.addAll(l);
-                graph.add(r);
-                l.clear();
-                lastTime=meetings[i][2];
+            for(int j : set){
+                if(find(j) != 0){
+                    unionFind[j] = j;
+                }
             }
         }
-        graph.add(l);
-        djs(n);
-        union(0,firstPerson);
-        for(int j=0 ;j<graph.size() ; j++){
-            HashSet<Integer> set = new HashSet<>();
-            for(int e : graph.get(j)){
-                int x = meetings[e][0];
-                int y = meetings[e][1];
-                union(x,y);
-                set.add(x);
-                set.add(y);
-            }
-            for(int e: set){
-                if(find(0)!=find(e)) reset(e);
+        for(i = 0 ; i < n ; i++){
+            if(find(i) == 0){
+                ans.add(i);
             }
         }
-        List<Integer> list = new ArrayList<>();
-        for(int j=0 ;j<n ; j++){
-            if(find(0)==find(j)) list.add(j);
-        }
-        return list;
-        
-    }
-    int[] parent = new int [100000];
-    void djs(int n){
-        for(int i=0 ; i<n ; i++){
-            parent[i] = i;
-        }
-    }
-    int find(int node){
-        if(parent[node] == node){
-            return node;
-        }
-        return parent[node] = find(parent[node]);
-    }
-    boolean union(int u ,int v){
-        u = find(u);
-        v = find(v);
-        if(u!=v){
-            parent[u] = v;
-            return true;
-        }
-        return false;
-    }
-    void reset(int node){
-        parent[node] = node;
+        return ans;
     }
 }
