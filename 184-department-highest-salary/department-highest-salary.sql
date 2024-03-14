@@ -1,0 +1,2 @@
+# Write your MySQL query statement below
+select Department , Employee , Salary from (select * , max(Salary) over(partition by Department) maxSal from (select  d.name Department,e.name Employee,e.salary Salary  from Employee e join department d on d.id = e.departmentId) t) tt where salary = maxSal;
