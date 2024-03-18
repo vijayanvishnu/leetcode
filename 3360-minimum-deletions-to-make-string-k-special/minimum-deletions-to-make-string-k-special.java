@@ -12,7 +12,6 @@ class Solution {
             }
         }
         Collections.sort(list);
-        System.out.println(list);
         int ans = word.length();
         for(int i = 0 ; i < list.size() ; i++){
             int l = i;
