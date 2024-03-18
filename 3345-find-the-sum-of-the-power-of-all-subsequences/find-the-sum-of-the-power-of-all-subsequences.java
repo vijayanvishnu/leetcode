@@ -31,7 +31,6 @@ class Solution {
         return dp[idx][count][k];
     }
     public int sumOfPower(int[] nums, int k) {
-        System.out.println(5+" "+power(2,5));
         dp = new Long[nums.length + 1][nums.length + 1][k + 1];
         return (int) helper(0,nums,0,k);
     }
