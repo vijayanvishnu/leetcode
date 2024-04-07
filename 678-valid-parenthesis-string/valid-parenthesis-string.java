@@ -24,7 +24,7 @@ class Solution {
         return dp[open - close][idx] = ans;
     }
     public boolean checkValidString(String s) {
-        dp = new Boolean[101][101];
+        dp = new Boolean[s.length() + 1][s.length() + 1];
         return helper(0,0,0,s.toCharArray());
     }
 }
