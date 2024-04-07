@@ -1,11 +1,11 @@
 class Solution {
-    Boolean dp[][][];
+    Boolean dp[][];
     private boolean helper(int open,int close,int idx,char str []){
         if(close > open){
             return false;
         }
-        if(dp[close][open][idx] != null){
-            return dp[close][open][idx];
+        if(dp[open - close][idx] != null){
+            return dp[open - close][idx];
         }
         if(idx == str.length){
             if(close == open) return true;
@@ -21,10 +21,10 @@ class Solution {
             ans = ans || helper(open + 1, close, idx + 1 , str);
             ans = ans || helper(open , close , idx + 1 , str);
         }
-        return dp[close][open][idx] = ans;
+        return dp[open - close][idx] = ans;
     }
     public boolean checkValidString(String s) {
-        dp = new Boolean[101][101][101];
+        dp = new Boolean[101][101];
         return helper(0,0,0,s.toCharArray());
     }
 }
