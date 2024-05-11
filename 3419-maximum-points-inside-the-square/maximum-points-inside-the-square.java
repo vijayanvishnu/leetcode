@@ -17,9 +17,10 @@ class Solution {
         int left = 0;
         int right = 1_00_000_000_1;
         int ans = 0;
+        char str[]  = s.toCharArray();
         while(left <= right){
             int mid = left + (right - left) / 2;
-            int count = helper(points,s.toCharArray(),mid);
+            int count = helper(points,str,mid);
             if(count == -1){
                 right = mid - 1;
             }else{
