@@ -2,8 +2,9 @@ class Solution {
     private long helper(int nums[][]){
         long row[] = new long[nums[0].length];
         long ans = 0;
+        long col[] = new long[nums[0].length + 1];
         for(int i = 0 ; i < nums.length ; i++){
-            long col[] = new long[nums[0].length + 1];
+            Arrays.fill(col,0);
             for(int j = nums[i].length - 1 ; j > -1 ; j--){
                 col[j] = col[j + 1] + (nums[i][j] == 1 ? 1 : 0);
             }
