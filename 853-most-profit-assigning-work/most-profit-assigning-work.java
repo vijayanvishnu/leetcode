@@ -24,19 +24,9 @@ class Solution {
         for(int i = 0; i < n ; i++){
             max[i + 1] = Math.max(max[i] , nums[i][1]);
         }
-        for(int i = 0 ; i < nums.length ; i++){
-            System.out.print(nums[i][0]+" ");
-        }
-        //System.out.println();
-        for(int i = 0 ; i < nums.length ; i++){
-            System.out.print(nums[i][1]+" ");
-        }
-        System.out.println("\n---------------");
         int ans = 0;
         for(int i = 0 ; i < worker.length ; i++){
             int bs = binarySearch(nums , worker[i]);
-            // System.out.println(bs);
-            // if(bs == nums.length || )
             ans = ans + max[bs];
         }
         return ans;
