@@ -10,7 +10,7 @@ class Solution {
             int max = Math.max(Math.max(nums[i],nums[idx]),k - Math.min(nums[i],nums[idx]));
             hash[max]+=2;
         }
-        System.out.println(Arrays.toString(hash));
+        // System.out.println(Arrays.toString(hash));
         int sum = 0;
         int ans = n;
         for(int i = k ; i > -1 ; i--){
