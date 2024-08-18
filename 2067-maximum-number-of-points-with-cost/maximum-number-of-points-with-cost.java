@@ -27,9 +27,6 @@ class Solution {
                 dp[i][j] = Math.max(sum + points[i][j] - Math.abs(idx-j),dp[i][j]);
             }
         }
-        for(long i[] : dp){
-            System.out.println(Arrays.toString(i));
-        }
         for(int i = 0 ; i < n ; i++){
             ans = Math.max(ans,dp[0][i]);
         }
