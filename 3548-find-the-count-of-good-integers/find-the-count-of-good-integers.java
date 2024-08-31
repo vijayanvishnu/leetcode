@@ -11,7 +11,6 @@ class Solution {
             if(q % k == 0){
                 int count = nums.length;
                 int zeros = 0;
-                ans = 1l;
                 int hash[] = new int[10];
                 for(int i = 0 ; i < nums.length ;  i++){
                     if(nums[i] == 0){
@@ -23,12 +22,8 @@ class Solution {
                     return 0l;
                 }
                 ans = count - zeros;
-                count--;
                 visited.add(Arrays.toString(hash));
-                for(int i = 1 ; i < nums.length ; i++){
-                    ans = ans * count;
-                    count--;
-                }
+                ans = ans * fact[count - 1];
                 for(int i = 0 ; i < 10 ; i++){
                     ans = ans / fact[hash[i]];
                 }
